@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- Include Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Include jQuery (required for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+
+      .hero.is-primary {
+        background: linear-gradient(45deg, #4a90e2, #50c6e1);
+      }
+
+      .input,
+      .textarea,
+      .select select {
+        border-radius: 6px;
+        border: 1px solid #ced4da;
+      }
+
+      .input:focus,
+      .textarea:focus,
+      .select select:focus {
+        border-color: #4a90e2;
+        box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+      }
+
+      .button.is-primary {
+        background-color: #4a90e2;
+        border-color: #4a90e2;
+      }
+
+      .button.is-primary:hover {
+        background-color: #357ab7;
+        border-color: #357ab7;
+      }
+
+      .button.is-danger {
+        background-color: #e74c3c;
+        border-color: #e74c3c;
+      }
+
+      .button.is-danger:hover {
+        background-color: #c0392b;
+        border-color: #c0392b;
+      }
+
+      .message {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      #servicesNameSelect {
+        width: 100%;
+      }
+
+      .field {
+        margin-bottom: 1.5rem;
+      }
+
+      .control span {
+        color: #4a90e2;
+      }
+
+      #emailError {
+        font-size: 0.9rem;
+        margin-top: 5px;
+      }
+
+      .is-grouped .control {
+        margin-right: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero is-primary is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">Booking Entry Form</h1>
+          <h2 class="subtitle">Effortlessly Manage Your Bookings</h2>
+        </div>
+      </div>
+    </section>
+    <form id="form" class="container m-5 box" method="POST" action="https://script.google.com/macros/s/AKfycbwuFC1OvQzR9TLGC5PJ__kKmn8ni4Wl6mBcrsdsg-QhfEDyhaFc4EW7jNROUMtwN7dzcA/exec" enctype="multipart/form-data" style="border-radius: 10px; padding: 2rem; box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);">
+      <div class="field">
+        <label class="label">BDE Name</label>
+        <div class="control has-icons-left">
+          <input
+            class="input"
+            type="text"
+            placeholder="Enter Your Name"
+            name="BDE Name"
+            required
+          />
+          <span class="icon is-left"><i class="fas fa-user"></i></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Bank Account</label>
+        <div class="control has-icons-left">
+          <div class="select is-fullwidth">
+            <select name="Bank Account" required>
+              <option value=""disabled selected>Select Bank Account</option>
+              <option value="Abtik Services LLP">Abtik Services LLP</option>
+              <option value="Abtik Financial Services Pvt Ltd">Abtik Financial Services Private Limited</option>
+              <option value="Abtik Startup Advisor Pvt Ltd">Abtik Startup Advisor Private Limited</option>
+            </select>
+          </div>
+          <span class="icon is-left"><i class="fas fa-university"></i></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Booking Date</label>
+        <div class="control has-icons-left" style="position: relative; display: flex; align-items: center;">
+          <input
+            id="bookingDate"
+            type="text"
+            placeholder="Select Date"
+            name="Booking Date"
+            style = "padding-right: 40px;"
+            class="input"
+          />
+          <span style="position: absolute; right: 10px; cursor: pointer;" class="icon is-left">
+            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Payment Date</label>
+        <div class="control has-icons-left" style="position: relative; display: flex; align-items: center;">
+          <input
+            id="paymentDate"
+            type="text"
+            placeholder="Select Date"
+            name="Payment Date"
+            style = "padding-right: 40px;"
+            class="input"
+          />
+          <span style="position: absolute; right: 10px; cursor: pointer;" class="icon is-left">
+            <i class="fas fa-calendar-check" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+      
+      <script>
+        flatpickr("#paymentDate", {
+          enableTime: false,
+          dateFormat: "m/d/Y",
+        });
+        flatpickr("#bookingDate", {
+          enableTime: false,
+          dateFormat: "m/d/Y",
+        });
+      </script>
+            
+      <div class="field">
+        <label class="label">Company Name</label>
+        <div class="control has-icons-left">
+          <input
+            class="input"
+            type="text"
+            placeholder="Enter Company Name"
+            name="Company Name"
+          />
+          <span class="icon is-left"><i class="fa-solid fa-building"></i></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">GST or PAN Number</label>
+        <div class="control has-icons-left">
+          <input
+            class="input"
+            type="text"
+            placeholder="Enter GST or PAN Number"
+            name="GST_OR_PAN"
+            required
+            pattern="(^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z0-9]{1}[Z]{1}[A-Z0-9]{1}$)|(^[A-Z]{5}[0-9]{4}[A-Z]{1}$)"
+            title="Enter a valid GST number (e.g., 22AAAAA1234A1Z5) or PAN number (e.g., ABCDE1234F)"
+          />
+          <span class="icon is-left"><i class="fa-duotone fa-solid fa-hashtag"></i></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Client Email</label>
+        <div class="control has-icons-left" id="emailContainer">
+          <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <input
+              class="input"
+              type="email"
+              placeholder="Enter Client Email"
+              name="Email[]"
+              style="flex: 1; margin-right: 10px;"
+              id="emailInput"
+              oninput="validateEmail(this)"
+            />
+            <span class="icon is-left"><i class="fa-solid fa-envelope"></i></span>
+            <button 
+            type="button"
+            class="button is-small is-success"
+            onclick="addEmailField()"
+            title="Add another email"
+            >
+            +
+            </button>
+         </div>
+         <p id="emailError" style="color: red; display: none;">Please enter a valid email address.</p>
+        </div>
+      </div>
+      <script>
+        // Function to add another email input field
+        function addEmailField() {
+          const emailContainer = document.getElementById('emailContainer');
+          const newField = document.createElement('div');
+          newField.style.display = 'flex';
+          newField.style.alignItems = 'center';
+          newField.style.marginBottom = '10px';
+          newField.innerHTML = `
+            <input class="input" type="email" placeholder="Enter Client Email" name="Email[]" style="flex: 1; margin-right: 10px;" oninput="validateEmail(this)" />
+            <button type="button" class="button is-small is-danger" onclick="removeEmailField(this)" title="Remove this email field">-</button>
+         `;
+          emailContainer.insertBefore(newField, document.getElementById('emailError'));
+        }
+        // Function to remove an email field
+        function removeEmailField(button) {
+          button.parentElement.remove();
+        }
+        
+        // Function to validate the email
+        function validateEmail(input) {
+          const emailError = document.getElementById('emailError');
+          const email = input.value.trim(); // Trim spaces from input
+          const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/; // Validate Gmail address format
+
+          // Step 1: Check general Gmail email format
+          if (!emailPattern.test(email)) {
+           emailError.style.display = 'block';
+           emailError.textContent = 'Please enter a valid Gmail address (e.g., example@gmail.com).';
+           return;
+          }
+
+          // Step 2: Check for mistakes before "@gmail.com"
+          const localPart = email.split('@')[0]; // Get the part before @gmail.com
+          const invalidCharPattern = /[^a-zA-Z0-9._%+-]/; // Invalid characters for email
+
+          if (invalidCharPattern.test(localPart)) {
+           emailError.style.display = 'block';
+           emailError.textContent = 'The email contains invalid characters. Only letters, numbers, and ._%+- are allowed before @gmail.com.';
+           return;
+          }
+
+          // If all checks pass
+          emailError.style.display = 'none';
+        }
+      </script>
+
+      <div class="field">
+        <label class="label">Client Mobile No.</label>
+        <div class="control has-icons-left" id="mobileContainer">
+          <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <input
+              class="input"
+              type="number"
+              placeholder="Enter Client Number"
+              name="Mobile[]"
+              style="flex: 1; margin-right: 10px;"
+            />
+            <button
+              class="button is-small is-success"
+              type="button"
+              onclick="addMobileField()"
+              title="Add another mobile number"
+            >
+            +
+            </button>
+         </div>
+         <span class="icon is-left"><i class="fa-duotone fa-solid fa-phone"></i></span>
+        </div>
+      </div>
+      <script>
+        function addMobileField() {
+          // Get the container where mobile inputs are added
+          const mobileContainer = document.getElementById("mobileContainer");
+      
+          // Create a new div to wrap the new mobile input and remove button
+          const newMobileDiv = document.createElement("div");
+          newMobileDiv.style.display = "flex";
+          newMobileDiv.style.alignItems = "center";
+          newMobileDiv.style.marginBottom = "10px";
+      
+          // Create the new mobile input
+          const newMobileInput = document.createElement("input");
+          newMobileInput.type = "number";
+          newMobileInput.placeholder = "Enter Client Number";
+          newMobileInput.name = "Mobile[]";
+          newMobileInput.className = "input";
+          newMobileInput.style.flex = "1";
+          newMobileInput.style.marginRight = "10px";
+      
+          // Create the remove button
+          const removeButton = document.createElement("button");
+          removeButton.type = "button";
+          removeButton.className = "button is-small is-danger";
+          removeButton.textContent = "-";
+          removeButton.title = "Remove this number";
+          removeButton.onclick = function () {
+            mobileContainer.removeChild(newMobileDiv);
+          };
+      
+          // Append the new input and remove button to the div
+          newMobileDiv.appendChild(newMobileInput);
+          newMobileDiv.appendChild(removeButton);
+      
+          // Append the new div to the container
+          mobileContainer.appendChild(newMobileDiv);
+        }
+      </script>
+
+      <div class="field">
+        <label class="label">Services</label>
+        <div class="control has-icons-left">
+            <select class="input" name="Services[]" multiple="multiple" id="servicesNameSelect">
+              <!-- <option value="" disabled selected>Select Services</option> -->
+              <option value="services1">Services 1</option>
+              <option value="services2">Services 2</option>
+              <option value="services3">Services 3</option>
+              <option value="services4">Services 4</option>
+              <option value="services5">Services 5</option>
+              <option value="services6">Services 6</option>
+              <option value="services7">Services 7</option>
+            </select>
+       </div>
+     </div>
+     <script>
+       $(document).ready(function() {
+         $('#servicesNameSelect').select2({
+          placeholder: "Select Services Name",
+          allowClear: true
+         });
+        });
+     </script>
+
+     <div class="field">
+       <label class="label">Basic Payment Amount</label>
+       <div class="control has-icons-left">
+         <input 
+         class="input" 
+         type="number" 
+         placeholder="Enter Basic Payment Amount" 
+         id="totalAmount" 
+         oninput="calculateAmounts()"
+         name="Basic Payment Amount"
+         />
+         <span class="icon is-left"><i class="fa-duotone fa-solid fa-indian-rupee-sign"></i></span>
+       </div>
+     </div>
+
+     <!-- <div class="field">
+       <label class="label">GST Percentage</label>
+        <div class="control">
+          <input 
+          class="input" 
+          type="number" 
+          placeholder="Enter GST Percentage (e.g., 18)" 
+          id="gstPercentage" 
+          oninput="calculateTotalPayment()"
+          />
+        </div>
+     </div> -->
+     <div class="field">
+       <label class="label">Received Amount - Including GST</label>
+        <div class="control has-icons-left">
+         <input
+          class="input"
+          type="number"
+          placeholder="Enter Received Amount"
+          id="receivedAmount"
+          oninput="calculateAmounts()"
+          name="Received Amount - Including GST"
+         />
+         <span class="icon is-left"><i class="fa-duotone fa-solid fa-indian-rupee-sign"></i></span>
+       </div>
+     </div>
+
+     <div class="field">
+       <label class="label">Remaining Amount - Including GST</label>
+       <div class="control has-icons-left">
+         <input
+          class="input"
+          type="text"
+          id="remainingAmount"
+          name="Remaining Amount"
+          readonly
+         />
+         <span class="icon is-left"><i class="fa-duotone fa-solid fa-indian-rupee-sign"></i></span>
+       </div>
+     </div>
+     <script>
+       function calculateAmounts() {
+        const totalAmount = parseFloat(document.getElementById('totalAmount').value) || 0;
+        const gstPercentage = 18;
+        const receivedAmount = parseFloat(document.getElementById('receivedAmount').value) || 0;
+    
+        // Calculate GST
+        const gstAmount = (totalAmount * gstPercentage) / 100;
+        const totalWithGst = totalAmount + gstAmount;
+    
+        // Calculate Remaining Amount
+        const remainingAmount = totalWithGst - receivedAmount;
+    
+        // Display Remaining Amount
+        document.getElementById('remainingAmount').value = remainingAmount.toFixed(2);
+       }
+     </script>
+
+     <div class="field">
+       <label class="label">After Fund Disbursement(%)</label>
+       <div class="control has-icons-left">
+         <input
+         class="input"
+         type="number"
+         placeholder="Enter Percentage"
+         name="After Fund Disbursement"
+         />
+         <span class="icon is-left"><i class="fa-duotone fa-solid fa-percent"></i></span>
+       </div>
+     </div>
+
+     <div class="field">
+      <label class="label">Upload File(s) or Folder</label>
+      <div class="control has-icons-left">
+        <input 
+        class="input"
+        type="file"
+        id="fileUpload"
+        name="files[]"
+        multiple
+      
+        onchange="handleFileSelection()"
+        />
+        <span class="icon is-left">
+          <i class="fas fa-folder-open"></i>
+        </span>
+      </div>
+      <div id="fileList" style="margin-top: 10px; font-size: 0.9rem;"></div>
+     </div>
+     <script>
+      function handleFileSelection() {
+        const fileInput = document.getElementById('fileUpload');
+        const fileListContainer = document.getElementById("fileList");
+
+        // Clear any previous file list
+        fileListContainer.innerHTML = "";
+
+        const files = fileInput.files;
+        if (files.length === 0) {
+          fileListContainer.innerHTML = "No files Selected."
+          return;
+        }
+        const fileList = document.createElement("ul");
+        for (let i = 0; i < files.length; i++) {
+          const fileItem = document.createElement("li");
+          fileItem.textContent = files[i].webkitRelativePath  || files[i].name;
+          fileList.appendChild(fileItem);
+        }
+        fileListContainer.appendChild(fileList);
+      }
+     </script>
+
+     <div class="field">
+        <label class="label">Additional Information</label>
+        <div class="control">
+          <textarea
+            class="textarea"
+            placeholder="Any additional information"
+            name="Notes"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary" type="submit" id="submit-button">
+            Submit
+          </button>
+        </div>
+        <div class="control">
+          <button class="button is-danger" type="button" onclick="clearForm()">Cancel</button>
+        </div>
+      </div>
+    </form>
+    <div
+      id="message"
+      style="
+        display: none;
+        margin: 20px;
+        font-weight: bold;
+        color: green;
+        padding: 8px;
+        background-color: beige;
+        border-radius: 4px;
+        border-color: aquamarine;
+      "
+    ></div>
+
+    <script>
+      document.getElementById("form").addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent the default form submission
+        document.getElementById("message").textContent = "Submitting..";
+        document.getElementById("message").style.display = "block";
+        document.getElementById("submit-button").disabled = true;
+
+        // Collect the form data
+        var formData = new FormData(this);
+        var keyValuePairs = [];
+        for (var pair of formData.entries()) {
+          keyValuePairs.push(pair[0] + "=" + pair[1]);
+        }
+
+        var formDataString = keyValuePairs.join("&");
+
+        // Send a POST request to your Google Apps Script
+        fetch(
+          "https://script.google.com/macros/s/AKfycbwuFC1OvQzR9TLGC5PJ__kKmn8ni4Wl6mBcrsdsg-QhfEDyhaFc4EW7jNROUMtwN7dzcA/exec",
+          {
+            redirect: "follow",
+            method: "POST",
+            body: formDataString,
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        )
+          .then(function (response) {
+            // Check if the request was successful
+            if (response) {
+              return response; // Assuming your script returns JSON response
+            } else {
+              throw new Error("Failed to submit the form.");
+            }
+          })
+          .then(function (data) {
+            // Display a success message
+            document.getElementById("message").textContent =
+              "Data submitted successfully!";
+            document.getElementById("message").style.display = "block";
+            document.getElementById("message").style.backgroundColor = "green";
+            document.getElementById("message").style.color = "beige";
+            document.getElementById("submit-button").disabled = false;
+            document.getElementById("form").reset();
+
+            setTimeout(function () {
+              document.getElementById("message").textContent = "";
+              document.getElementById("message").style.display = "none";
+            }, 2600);
+          })
+          .catch(function (error) {
+            // Handle errors, you can display an error message here
+            console.error(error);
+            document.getElementById("message").textContent =
+              "An error occurred while submitting the form.";
+            document.getElementById("message").style.display = "block";
+          });
+          const services = $('#servicesNameSelect').val(); // Get selected values as an array
+        if (services) {
+          services.forEach(service => {
+            formData.append("Services[]", service);
+          });
+        }
+      });
+    </script>
+    <script>
+      function clearForm() {
+        // Get the form element
+        const form = document.getElementById("form");
+    
+        // Reset all form fields
+        form.reset();
+    
+        // If Select2 dropdowns are used, clear their selections
+        $('#servicesNameSelect').val(null).trigger('change');
+        document.getElementById('fileList').innerHTML = '';  // Clear file list
+        document.getElementById("message").style.display = "none";  
+    
+        // Clear any custom dynamic fields (like emails or mobile numbers) except the first ones
+        const emailContainer = document.getElementById("emailContainer");
+        const emailFields = emailContainer.querySelectorAll("div:not(:first-child)");
+        emailFields.forEach(field => field.remove());
+    
+        const mobileContainer = document.getElementById("mobileContainer");
+        const mobileFields = mobileContainer.querySelectorAll("div:not(:first-child)");
+        mobileFields.forEach(field => field.remove());
+      }
+    </script>
+    
+  </body>
+</html>
